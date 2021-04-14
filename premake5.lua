@@ -20,9 +20,13 @@ workspace "VTT"
 		optimize "On"
 	
 	filter { "platforms:x64" }
-		system "Windows"
+		--system "Windows"
 		architecture "x86_64"
 	
+	--filter "platforms:Linux_x64"
+	--	system "linux"
+	--	architecture "x86_64"	
+
 	filter "system:macosx"
 		xcodebuildsettings {
 			["MACOSX_DEPLOYMENT_TARGET"] = "10.9",

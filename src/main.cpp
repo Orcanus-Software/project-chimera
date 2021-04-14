@@ -2,16 +2,7 @@
 #include <bx/bx.h>
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
-#include <GLFW/glfw3.h>
-#if BX_PLATFORM_LINUX
-#define GLFW_EXPOSE_NATIVE_X11
-#elif BX_PLATFORM_WINDOWS
-#define GLFW_EXPOSE_NATIVE_WIN32
-#elif BX_PLATFORM_OSX
-#define GLFW_EXPOSE_NATIVE_COCOA
-#endif
-#include <GLFW/glfw3native.h>
-#include "platform.h"
+#include "render_target/Window.h"
 
 #define LOG(x) std::cout << x << std::endl
 
@@ -26,6 +17,8 @@ static void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int actio
 {
 	//if (key == GLFW_KEY_F1 && action == GLFW_RELEASE)
 	//	s_showStats = !s_showStats;
+	if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+		glfwSetWindowShouldClose(window, true);
 }
 
 static void glfwFramebufferResizeCallback(GLFWwindow* window, int width, int height)
@@ -40,34 +33,21 @@ int main(int argc, char** argv) {
 	// Initialize glfw error callback
 	glfwSetErrorCallback(glfwErrorCallback);
 
-	// Try to initalize glfw or print an error and fail
-	if (!glfwInit()) {
-		LOG("GLFW could not initalize, aborting!");
-		return 1;
-	}
+	
+	VTT::Window window = VTT::Window("BGFX Test Application", 1024, 768);
 
-	// NOAPI, so that BGFX can render agnostically
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	GLFWwindow* window = glfwCreateWindow(1024, 768, "BGFX Test Application", nullptr, nullptr);
-
-	// Test if the window exists
-	if (!window) {
-		LOG("Failed to create window, aboriting.");
-		return 1;
-	}
-
-	glfwSetKeyCallback(window, glfwKeyCallback);
-	glfwSetFramebufferSizeCallback(window, glfwFramebufferResizeCallback);
+	glfwSetKeyCallback(window.getHandle(), glfwKeyCallback);
+	glfwSetFramebufferSizeCallback(window.getHandle(), glfwFramebufferResizeCallback);
 
 	// Call bgfx::renderFrame before bgfx::init to signal to bgfx not to create a render thread.
 	// Most graphics APIs must be used on the same thread that created the window.
 	bgfx::renderFrame();
 	// Initialize bgfx using the native window handle and window resolution.
 	bgfx::Init init;
-	SET_PLATFORM
+	window.fillBGFXInit(init);
 
 	int win_width, win_height;
-	glfwGetWindowSize(window, &win_width, &win_height);
+	glfwGetWindowSize(window.getHandle(), &win_width, &win_height);
 	init.resolution.width = (uint32_t)win_width;
 	init.resolution.height = (uint32_t)win_height;
 	init.resolution.reset = BGFX_RESET_VSYNC;
@@ -83,7 +63,7 @@ int main(int argc, char** argv) {
 	bgfx::setViewRect(kClearView, 0, 0, bgfx::BackbufferRatio::Equal);
 
 	// while the window should stay open.
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window.getHandle())) {
 		glfwPollEvents();
 		// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.
 		bgfx::touch(kClearView);
