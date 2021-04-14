@@ -59,11 +59,13 @@ project "VTT"
 	}
 	
 	includedirs {
+		"lib",
 		"include",
 		GLFW_DIR .. "include",
 		BGFX_DIR .. "include",
 		BIMG_DIR .. "include",
-		BX_DIR .. "include"
+		BX_DIR .. "include",
+		SPDLOG_DIR .. "include"
 	}
 	
 	links {
