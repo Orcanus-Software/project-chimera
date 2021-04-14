@@ -1,8 +1,18 @@
+# Visual Studio
 **.vcxproj*
 **.sln
-bin/
-bin-int/
 .vs/
 
+# Makefiles
 Makefile
 **.make
+
+# Xcode
+**.xcodeproj/
+**.xcworkspace/
+
+# Build Artifacts
+bin/
+bin-int/
+
+
