@@ -5,6 +5,7 @@ local GLFW_DIR = "lib/glfw/"
 local BGFX_DIR = "lib/bgfx/"
 local BIMG_DIR = "lib/bimg/"
 local BX_DIR = "lib/bx/"
+local SPDLOG_DIR = "lib/spdlog/"
 
 workspace "VTT"
 	configurations { "Debug", "Release" }
@@ -69,7 +70,8 @@ project "VTT"
 		"GLFW",
 		"BGFX",
 		"BIMG",
-		"BX"
+		"BX",
+		"spdlog"
 	}
 	
 	filter "system:windows"
@@ -310,3 +312,35 @@ project "BX"
 		defines "_CRT_SECURE_NO_WARNINGS"
 	
 	setBxCompat()
+
+project "spdlog"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++11"
+
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		SPDLOG_DIR .. "src/spdlog.cpp",
+		SPDLOG_DIR .. "src/stdout_sinks.cpp", 
+		SPDLOG_DIR .. "src/color_sinks.cpp", 
+		SPDLOG_DIR .. "src/file_sinks.cpp", 
+		SPDLOG_DIR .. "src/async.cpp",
+		SPDLOG_DIR .. "src/cfg.cpp",
+		SPDLOG_DIR .. "src/fmt.cpp"
+	}
+
+	includedirs 
+	{
+		SPDLOG_DIR .. "include"
+	}
+
+	defines
+	{
+		"SPDLOG_COMPILED_LIB"
+	}
+
+	filter "action:vs*"
+		defines "_CRT_SECURE_NO_WARNINGS"

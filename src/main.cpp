@@ -8,6 +8,42 @@
 
 const bgfx::ViewId kClearView = 0;
 
+struct PosColorVertex
+{
+    float x;
+    float y;
+    float z;
+    uint32_t abgr;
+};
+
+static PosColorVertex cubeVertices[] =
+{
+    {-1.0f,  1.0f,  1.0f, 0xff000000 },
+    { 1.0f,  1.0f,  1.0f, 0xff0000ff },
+    {-1.0f, -1.0f,  1.0f, 0xff00ff00 },
+    { 1.0f, -1.0f,  1.0f, 0xff00ffff },
+    {-1.0f,  1.0f, -1.0f, 0xffff0000 },
+    { 1.0f,  1.0f, -1.0f, 0xffff00ff },
+    {-1.0f, -1.0f, -1.0f, 0xffffff00 },
+    { 1.0f, -1.0f, -1.0f, 0xffffffff },
+};
+
+static const uint16_t cubeTriList[] =
+{
+    0, 1, 2,
+    1, 3, 2,
+    4, 6, 5,
+    5, 6, 7,
+    0, 2, 4,
+    4, 2, 6,
+    1, 5, 3,
+    5, 7, 3,
+    0, 4, 1,
+    4, 5, 1,
+    2, 3, 6,
+    6, 3, 7,
+};
+
 static void glfwErrorCallback(int error, const char* description)
 {
 	fprintf(stderr, "GLFW error %d: %s\n", error, description);
@@ -46,21 +82,25 @@ int main(int argc, char** argv) {
 	bgfx::Init init;
 	window.fillBGFXInit(init);
 
-	int win_width, win_height;
-	glfwGetWindowSize(window.getHandle(), &win_width, &win_height);
-	init.resolution.width = (uint32_t)win_width;
-	init.resolution.height = (uint32_t)win_height;
-	init.resolution.reset = BGFX_RESET_VSYNC;
-
 	// Try to initialize bgfx
 	if (!bgfx::init(init)) {
-		LOG("Could not initialize BGFX, aboriting.");
+		LOG("Could not initialize BGFX, aborting.");
 		return 1;
 	}
 
 	// Set view 0 to the same dimensions as the window and to clear the color buffer.
-	bgfx::setViewClear(kClearView, BGFX_CLEAR_COLOR);
+	bgfx::setViewClear(kClearView, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355F, 1.0f, 0);
 	bgfx::setViewRect(kClearView, 0, 0, bgfx::BackbufferRatio::Equal);
+
+	// create a new cube
+	bgfx::VertexDecl pcvDecl;
+	pcvDecl.begin()
+		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+		.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+	.end();
+
+	bgfx::VertexBufferHandle vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices), pcvDecl));
+	bgfx::IndexBufferHandle ibh = bgfx::createIndexBuffer(bgfx::makeRef(cubeTriList, sizeof(cubeTriList)));
 
 	// while the window should stay open.
 	while (!glfwWindowShouldClose(window.getHandle())) {
@@ -70,7 +110,7 @@ int main(int argc, char** argv) {
 		// Use debug font to print information about this example.
 		bgfx::dbgTextClear();
 		//bgfx::dbgTextImage(bx::max<uint16_t>(uint16_t(win_width / 2 / 8), 20) - 20, bx::max<uint16_t>(uint16_t(win_height / 2 / 16), 6) - 6, 40, 12, s_logo, 160);
-		bgfx::dbgTextPrintf(0, 0, 0x0f, "Press F1 to toggle stats.");
+		bgfx::dbgTextPrintf(0, 0, 0x0f, "Cube Demo");
 		bgfx::dbgTextPrintf(0, 1, 0x0f, "Color can be changed with ANSI \x1b[9;me\x1b[10;ms\x1b[11;mc\x1b[12;ma\x1b[13;mp\x1b[14;me\x1b[0m code too.");
 		bgfx::dbgTextPrintf(80, 1, 0x0f, "\x1b[;0m    \x1b[;1m    \x1b[; 2m    \x1b[; 3m    \x1b[; 4m    \x1b[; 5m    \x1b[; 6m    \x1b[; 7m    \x1b[0m");
 		bgfx::dbgTextPrintf(80, 2, 0x0f, "\x1b[;8m    \x1b[;9m    \x1b[;10m    \x1b[;11m    \x1b[;12m    \x1b[;13m    \x1b[;14m    \x1b[;15m    \x1b[0m");
