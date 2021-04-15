@@ -1,4 +1,442 @@
-[2021-04-15 09:08:37.548] [VTT] [info] Initializing GLFW.
-[2021-04-15 09:08:37.850] [VTT] [info] Initializing BGFX
-[2021-04-15 09:08:37.874] [VTT] [trace] Filling init struct
-[2021-04-15 09:08:37.898] [VTT] [trace] Attempting BGFX Initialize
+[2021-04-15 09:36:12.153] [VTT] [info] Initializing GLFW.
+[2021-04-15 09:36:12.662] [VTT] [info] Initializing BGFX
+[2021-04-15 09:36:12.673] [VTT] [trace] Filling init struct
+[2021-04-15 09:36:12.677] [VTT] [trace] Attempting BGFX Initialize
+[2021-04-15 09:36:13.698] [VTT] [trace] Setting up the view.
+[2021-04-15 09:36:13.705] [VTT] [trace] Setting up the cube vertices.
+[2021-04-15 09:36:13.705] [VTT] [trace] Loading shaders.
+[2021-04-15 09:36:13.706] [VTT] [info] Opening shader file: shaders/dx11/vs_cubes.bin
+[2021-04-15 09:36:13.707] [VTT] [info] Opening shader file: shaders/dx11/fs_cubes.bin
+[2021-04-15 09:36:13.707] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.711] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.727] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.727] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.739] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.741] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.743] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.745] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.755] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.756] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.758] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.758] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.762] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.763] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.765] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.766] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.769] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.770] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.771] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.772] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.796] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.801] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.802] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.803] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.812] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.814] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.816] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.816] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.829] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.832] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.834] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.834] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.846] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.850] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.853] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.855] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.862] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.864] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.866] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.866] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.879] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.881] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.884] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.885] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.896] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.897] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.898] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.899] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.912] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.916] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.920] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.920] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.929] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.931] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.933] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.933] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.947] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.949] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.951] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.952] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.962] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.964] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.966] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.966] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.979] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.980] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:13.982] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:13.983] [VTT] [trace] Rendering.
+[2021-04-15 09:36:13.996] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:13.999] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.000] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.001] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.012] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.014] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.015] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.016] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.029] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.031] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.033] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.035] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.046] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.046] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.048] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.050] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.062] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.064] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.069] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.070] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.079] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.083] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.084] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.085] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.096] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.100] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.102] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.102] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.112] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.114] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.116] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.116] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.129] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.130] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.133] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.134] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.146] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.148] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.152] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.153] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.162] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.163] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.165] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.165] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.179] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.180] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.183] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.183] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.196] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.197] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.199] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.199] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.213] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.213] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.215] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.216] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.229] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.230] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.231] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.232] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.249] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.251] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.259] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.260] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.265] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.266] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.271] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.272] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.279] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.280] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.282] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.285] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.297] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.301] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.303] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.303] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.313] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.314] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.321] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.321] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.329] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.331] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.333] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.333] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.346] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.347] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.349] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.350] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.365] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.366] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.368] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.368] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.379] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.380] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.382] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.383] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.396] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.397] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.399] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.399] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.413] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.413] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.415] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.416] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.433] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.434] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.435] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.436] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.446] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.447] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.449] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.449] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.463] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.463] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.465] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.465] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.479] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.480] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.482] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.483] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.497] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.497] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.499] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.501] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.513] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.513] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.516] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.517] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.530] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.531] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.533] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.535] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.546] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.548] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.550] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.550] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.563] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.566] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.568] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.568] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.581] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.583] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.586] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.586] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.597] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.598] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.600] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.601] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.613] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.614] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.616] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.616] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.632] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.633] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.635] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.636] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.646] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.649] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.650] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.651] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.663] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.666] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.668] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.668] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.680] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.681] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.682] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.683] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.696] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.697] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.699] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.700] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.713] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.714] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.716] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.717] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.730] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.731] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.733] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.733] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.746] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.747] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.749] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.750] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.764] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.765] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.767] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.770] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.780] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.781] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.784] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.788] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.797] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.799] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.801] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.802] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.814] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.816] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.818] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.819] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.830] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.831] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.833] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.835] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.847] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.848] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.850] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.850] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.863] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.864] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.866] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.867] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.880] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.881] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.883] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.883] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.898] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.899] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.901] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.901] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.913] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.915] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.918] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.918] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.930] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.933] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.934] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.935] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.947] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.947] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.949] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.950] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.965] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.977] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.979] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.983] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.987] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.987] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:14.989] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:14.990] [VTT] [trace] Rendering.
+[2021-04-15 09:36:14.997] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:14.998] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.000] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.000] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.013] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.014] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.016] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.016] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.035] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.035] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.037] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.038] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.047] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.047] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.052] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.053] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.064] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.065] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.067] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.067] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.080] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.081] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.083] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.083] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.097] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.097] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.099] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.100] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.114] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.114] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.116] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.116] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.131] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.131] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.133] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.133] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.148] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.150] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.152] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.152] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.164] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.164] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.166] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.167] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.181] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.182] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.183] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.184] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.198] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.207] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.209] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.209] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.213] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.214] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.216] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.217] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.230] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.231] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.233] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.235] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.247] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.248] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.250] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.252] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.264] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.267] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.269] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.270] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.280] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.286] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.289] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.289] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.299] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.300] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.302] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.303] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.314] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.315] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.317] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.318] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.330] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.332] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.334] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.334] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.347] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.348] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.351] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.352] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.364] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.365] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.367] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.367] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.380] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.381] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.383] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.384] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.398] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.400] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.402] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.402] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.414] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.415] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.416] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.418] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.430] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.431] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.433] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.433] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.447] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.448] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.450] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.450] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.465] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.473] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.476] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.476] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.480] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.481] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.489] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.490] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.497] [VTT] [trace] Polling Events.
+[2021-04-15 09:36:15.573] [VTT] [trace] Setting up debug.
+[2021-04-15 09:36:15.578] [VTT] [trace] Setting up cube.
+[2021-04-15 09:36:15.579] [VTT] [trace] Rendering.
+[2021-04-15 09:36:15.581] [VTT] [debug] Shutting Down!
