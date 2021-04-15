@@ -1,0 +1,4 @@
+[2021-04-15 09:08:37.548] [VTT] [info] Initializing GLFW.
+[2021-04-15 09:08:37.850] [VTT] [info] Initializing BGFX
+[2021-04-15 09:08:37.874] [VTT] [trace] Filling init struct
+[2021-04-15 09:08:37.898] [VTT] [trace] Attempting BGFX Initialize

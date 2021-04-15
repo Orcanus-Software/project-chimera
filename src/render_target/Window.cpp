@@ -5,7 +5,7 @@ VTT::Window::Window(const char * name, int width, int height)
 {
 	// Try to initalize glfw or print an error and fail
 	if (!glfwInit()) {
-		//LOG("GLFW could not initalize, aborting!");
+		Logger::getLogger()->error("GLFW could not initalize, aborting!");
 		throw 1;
 	}
 
@@ -15,7 +15,7 @@ VTT::Window::Window(const char * name, int width, int height)
 
 	// Test if the window exists
 	if (!windowHandle) {
-		//LOG("Failed to create window, aborting.");
+		Logger::getLogger()->error("Failed to create window, aborting.");
 		throw 1;
 	}
 }
@@ -41,4 +41,13 @@ void VTT::Window::fillBGFXInit(bgfx::Init& init)
 	init.resolution.width = (uint32_t)win_width;
 	init.resolution.height = (uint32_t)win_height;
 	init.resolution.reset = BGFX_RESET_VSYNC;
+}
+
+bx::Vec3 VTT::Window::getSize()
+{
+	int width;
+	int height;
+	glfwGetWindowSize(windowHandle, &width, &height);
+	
+	return bx::Vec3(width, height, 0.0);
 }

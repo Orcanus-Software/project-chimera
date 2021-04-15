@@ -1,11 +1,18 @@
 -- Virtual Table Top Premake File
 
 -- Directory Defines
+local ASSIMP_DIR = "lib/assimp/"
 local GLFW_DIR = "lib/glfw/"
 local BGFX_DIR = "lib/bgfx/"
 local BIMG_DIR = "lib/bimg/"
 local BX_DIR = "lib/bx/"
 local SPDLOG_DIR = "lib/spdlog/"
+local IMGUI_DIR = "lib/imgui/"
+local PAR_SHAPES_DIR = "lib/par/"
+local STB_DIR = "lib/stb/"
+local YOGA_DIR = "lib/yoga/"
+local RPMALLOC_DIR = "lib/rpmalloc/"
+local TINY_FD_DIR = "lib/tinyfiledialogs/"
 
 workspace "VTT"
 	configurations { "Debug", "Release" }
@@ -33,6 +40,8 @@ workspace "VTT"
 			["MACOSX_DEPLOYMENT_TARGET"] = "10.9",
 			["ALWAYS_SEARCH_USER_PATHS"] = "YES", -- This is the minimum version of macos we'll be able to run on
 		};
+	filter "system:windows"
+		systemversion "latest"
 		
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -55,17 +64,24 @@ project "VTT"
 	
 	files {
 		"src/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		TINY_FD_DIR .. "tinyfiledialogs.c"
 	}
 	
 	includedirs {
 		"lib",
 		"include",
+		"src",
 		GLFW_DIR .. "include",
 		BGFX_DIR .. "include",
 		BIMG_DIR .. "include",
 		BX_DIR .. "include",
-		SPDLOG_DIR .. "include"
+		SPDLOG_DIR .. "include",
+		PAR_SHAPES_DIR,
+		IMGUI_DIR,
+		STB_DIR,
+		YOGA_DIR .. "yoga",
+		TINY_FD_DIR
 	}
 	
 	links {
@@ -73,17 +89,21 @@ project "VTT"
 		"BGFX",
 		"BIMG",
 		"BX",
-		"spdlog"
+		"spdlog",
+		"ImGUI",
+		"yoga"
 	}
 	
 	filter "system:windows"
 		systemversion "latest"
-		--links 
-		--{
-			--"gdi32",
-			--"kernel32",
-			--"psapi"
-		--}
+		--"gdi32",
+		--"kernel32",
+		--"psapi"
+		links 
+		{
+			"comdlg32",
+			"ole32"
+		}
 	
 	filter "system:linux"
 		links 
@@ -131,7 +151,7 @@ project "GLFW"
 		pic "On"
 
 		systemversion "latest"
-		staticruntime "On"
+		--staticruntime "On"
 
 		files
 		{
@@ -154,7 +174,7 @@ project "GLFW"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On"
+		--staticruntime "On"
 
 		files
 		{
@@ -315,6 +335,7 @@ project "BX"
 	
 	setBxCompat()
 
+-- Building spdlog
 project "spdlog"
 	kind "StaticLib"
 	language "C++"
@@ -346,3 +367,67 @@ project "spdlog"
 
 	filter "action:vs*"
 		defines "_CRT_SECURE_NO_WARNINGS"
+
+-- Building Dear IMGui
+project "ImGUI"
+	kind "StaticLib"
+	language "C++"
+	
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+	
+	files 
+	{
+		IMGUI_DIR .. "imconfig.h",
+		IMGUI_DIR .. "imgui.h",
+		IMGUI_DIR .. "imgui.cpp",
+		IMGUI_DIR .. "imgui_draw.cpp",
+		IMGUI_DIR .. "imgui_internal.h",
+		IMGUI_DIR .. "imgui_widgets.cpp",
+		IMGUI_DIR .. "imstb_rectpack.h",
+		IMGUI_DIR .. "imstb_textedit.h",
+		IMGUI_DIR .. "imstb_truetype.h",
+		IMGUI_DIR .. "imgui_demo.cpp"
+	}
+	
+	filter "system:windows"
+		systemversion "latest"
+		cppdialect "C++17"
+	
+	filter "system:linux"
+		pic "On"
+		systemversion "latest"
+		cppdialect "C++17"
+		
+-- Building Yoga
+project "yoga"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++11"
+	pic "On"
+	
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+	
+	files 
+	{
+		YOGA_DIR .. "yoga/**.cpp",
+		YOGA_DIR .. "yoga/**.h"
+	}
+	
+	includedirs
+	{
+		YOGA_DIR,
+		YOGA_DIR .. "yoga"
+	}
+	
+	defines 
+	{
+		"YG_ENABLE_EVENTS"
+	}
+	
+	filter "configurations:Debug"
+		defines 
+		{
+			"DEBUG"
+		}

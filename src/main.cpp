@@ -1,10 +1,15 @@
 #include <iostream>
+#include <memory>
 #include <bx/bx.h>
+#include <bx/math.h>
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
 #include "render_target/Window.h"
+#include "debug/Log.h"
+#include <par_shapes.h>
+#include "tinyfiledialogs.h"
 
-#define LOG(x) std::cout << x << std::endl
+using namespace VTT;
 
 const bgfx::ViewId kClearView = 0;
 
@@ -63,8 +68,48 @@ static void glfwFramebufferResizeCallback(GLFWwindow* window, int width, int hei
 	bgfx::setViewRect(kClearView, 0, 0, bgfx::BackbufferRatio::Equal);
 }
 
+bgfx::ShaderHandle loadShader(const char * filename) 
+{
+	const char* shaderPath = "";
+
+	switch (bgfx::getRendererType()) {
+	case bgfx::RendererType::Noop:
+	case bgfx::RendererType::Direct3D9:  shaderPath = "shaders/dx9/";   break;
+	case bgfx::RendererType::Direct3D11:
+	case bgfx::RendererType::Direct3D12: shaderPath = "shaders/dx11/";  break;
+	case bgfx::RendererType::Gnm:        shaderPath = "shaders/pssl/";  break;
+	case bgfx::RendererType::Metal:      shaderPath = "shaders/metal/"; break;
+	case bgfx::RendererType::OpenGL:     shaderPath = "shaders/glsl/";  break;
+	case bgfx::RendererType::OpenGLES:   shaderPath = "shaders/essl/";  break;
+	case bgfx::RendererType::Vulkan:     shaderPath = "shaders/spirv/"; break;
+	}
+
+	size_t shaderLen = strlen(shaderPath);
+	size_t fileLen = strlen(filename);
+	char* filePath = (char*)malloc(shaderLen + fileLen+1);
+	memcpy(filePath, shaderPath, shaderLen);
+	memcpy(&filePath[shaderLen], filename, fileLen);
+	filePath[shaderLen + fileLen] = '\0';
+
+	Logger::getLogger()->info("Opening shader file: {}", filePath);
+
+	FILE* file = fopen(filePath, "rb");
+	fseek(file, 0, SEEK_END);
+	long fileSize = ftell(file);
+	fseek(file, 0, SEEK_SET);
+
+	const bgfx::Memory* mem = bgfx::alloc(fileSize + 1);
+	fread(mem->data, 1, fileSize, file);
+	mem->data[mem->size - 1] = '\0';
+	fclose(file);
+
+	return bgfx::createShader(mem);
+}
+
 int main(int argc, char** argv) {
-	LOG("Hello BGFX!");
+	Logger::Init();
+
+	Logger::getLogger()->info("Initializing GLFW.");
 
 	// Initialize glfw error callback
 	glfwSetErrorCallback(glfwErrorCallback);
@@ -75,38 +120,53 @@ int main(int argc, char** argv) {
 	glfwSetKeyCallback(window.getHandle(), glfwKeyCallback);
 	glfwSetFramebufferSizeCallback(window.getHandle(), glfwFramebufferResizeCallback);
 
+	Logger::getLogger()->info("Initializing BGFX");
 	// Call bgfx::renderFrame before bgfx::init to signal to bgfx not to create a render thread.
 	// Most graphics APIs must be used on the same thread that created the window.
 	bgfx::renderFrame();
+
+	Logger::getLogger()->trace("Filling init struct");
 	// Initialize bgfx using the native window handle and window resolution.
 	bgfx::Init init;
 	window.fillBGFXInit(init);
 
 	// Try to initialize bgfx
+	Logger::getLogger()->trace("Attempting BGFX Initialize");
 	if (!bgfx::init(init)) {
-		LOG("Could not initialize BGFX, aborting.");
+		Logger::getLogger()->error("Could not initialize BGFX, aborting.");
 		return 1;
 	}
 
+	Logger::getLogger()->trace("Setting up the view.");
 	// Set view 0 to the same dimensions as the window and to clear the color buffer.
 	bgfx::setViewClear(kClearView, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355F, 1.0f, 0);
 	bgfx::setViewRect(kClearView, 0, 0, bgfx::BackbufferRatio::Equal);
 
+	Logger::getLogger()->trace("Setting up the cube vertices.");
 	// create a new cube
-	bgfx::VertexDecl pcvDecl;
+	bgfx::VertexLayout pcvDecl;
 	pcvDecl.begin()
 		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
 		.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
 	.end();
 
-	bgfx::VertexBufferHandle vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices), pcvDecl));
+	bgfx::VertexBufferHandle vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices)), pcvDecl);
 	bgfx::IndexBufferHandle ibh = bgfx::createIndexBuffer(bgfx::makeRef(cubeTriList, sizeof(cubeTriList)));
 
+	Logger::getLogger()->trace("Loading shaders.");
+	bgfx::ShaderHandle vsh = loadShader("vs_cubes.bin");
+	bgfx::ShaderHandle fsh = loadShader("fs_cubes.bin");
+	bgfx::ProgramHandle program = bgfx::createProgram(vsh, fsh, true);
+
 	// while the window should stay open.
+	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
+		Logger::getLogger()->trace("Polling Events.");
 		glfwPollEvents();
 		// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.
 		bgfx::touch(kClearView);
+
+		Logger::getLogger()->trace("Setting up debug.");
 		// Use debug font to print information about this example.
 		bgfx::dbgTextClear();
 		//bgfx::dbgTextImage(bx::max<uint16_t>(uint16_t(win_width / 2 / 8), 20) - 20, bx::max<uint16_t>(uint16_t(win_height / 2 / 16), 6) - 6, 40, 12, s_logo, 160);
@@ -118,10 +178,34 @@ int main(int argc, char** argv) {
 		bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters.", stats->width, stats->height, stats->textWidth, stats->textHeight);
 		// Enable stats or debug text.
 		bgfx::setDebug(false ? BGFX_DEBUG_STATS : BGFX_DEBUG_TEXT);
+
+		Logger::getLogger()->trace("Setting up cube.");
+		// cube rendering
+		const bx::Vec3 at = { 0.0f, 0.0f, 0.0f };
+		const bx::Vec3 eye = { 0.0f, 0.0f, -5.0f };
+		float view[16];
+		bx::mtxLookAt(view, eye, at);
+
+		float proj[16];
+		bx::mtxProj(proj, 60.0f, float(window.getSize().x) / float(window.getSize().y), 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
+		bgfx::setViewTransform(0, view, proj);
+
+		float mtx[16];
+		bx::mtxRotateXY(mtx, counter * 0.01f, counter * 0.01f);
+		bgfx::setTransform(mtx);
+
+		bgfx::setVertexBuffer(0, vbh);
+		bgfx::setIndexBuffer(ibh);
+
+		Logger::getLogger()->trace("Rendering.");
+		bgfx::submit(0, program);
+
 		// Advance to next frame. Process submitted rendering primitives.
 		bgfx::frame();
+		counter++;
 	}
 
+	Logger::getLogger()->debug("Shutting Down!");
 	// Try to shutdown and terminate
 	bgfx::shutdown();
 	glfwTerminate();

@@ -12,6 +12,9 @@
 #define GLFW_EXPOSE_NATIVE_COCOA
 #endif
 #include <GLFW/glfw3native.h>
+#include "debug/Log.h"
+#include <bx/bx.h>
+#include <bx/math.h>
 
 namespace VTT {
 	class Window 
@@ -23,6 +26,8 @@ namespace VTT {
 		GLFWwindow* getHandle() { return windowHandle; }
 
 		void fillBGFXInit(bgfx::Init& init);
+
+		bx::Vec3 getSize();
 	private:
 		GLFWwindow* windowHandle;
 	};
