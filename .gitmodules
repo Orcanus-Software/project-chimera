@@ -19,3 +19,18 @@
 [submodule "lib/assimp"]
 	path = lib/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "lib/imgui"]
+	path = lib/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "lib/Remotery"]
+	path = lib/Remotery
+	url = https://github.com/Celtoys/Remotery.git
+[submodule "lib/rpmalloc"]
+	path = lib/rpmalloc
+	url = https://github.com/mjansson/rpmalloc.git
+[submodule "lib/yoga"]
+	path = lib/yoga
+	url = https://github.com/facebook/yoga.git
+[submodule "lib/stb"]
+	path = lib/stb
+	url = https://github.com/nothings/stb.git
