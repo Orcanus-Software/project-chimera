@@ -22,9 +22,6 @@
 [submodule "lib/imgui"]
 	path = lib/imgui
 	url = https://github.com/ocornut/imgui.git
-[submodule "lib/Remotery"]
-	path = lib/Remotery
-	url = https://github.com/Celtoys/Remotery.git
 [submodule "lib/rpmalloc"]
 	path = lib/rpmalloc
 	url = https://github.com/mjansson/rpmalloc.git
