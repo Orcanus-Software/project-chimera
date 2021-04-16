@@ -154,14 +154,14 @@ int main(int argc, char** argv) {
 	bgfx::ProgramHandle program = bgfx::createProgram(vsh, fsh, true);
 
 	AudioManager audioManager;
-	Buffer sound1 = audioManager.loadVorbisFile("resources/audio/test1.ogg");
-	Source source = audioManager.createSource(sound1);
-	source.play();
+	std::shared_ptr<Buffer> sound1 = audioManager.loadVorbisFile("resources/audio/test1.ogg");
+	std::shared_ptr <Source> source = audioManager.createSource(sound1);
+	source->play();
 
 	// while the window should stay open.
 	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
-		if (source.isPlaying())
+		if (source->isPlaying())
 			Logger::getLogger()->info("Source is still playing.");
 		glfwPollEvents();
 		// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.

@@ -9,7 +9,7 @@ namespace VTT {
 	class Source {
 		ALuint handle;
 	public:
-		Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop, Buffer& buffer);
+		Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop, ALuint buffer);
 		~Source();
 
 		void play() { alSourcePlay(handle); };

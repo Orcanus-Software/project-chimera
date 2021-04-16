@@ -51,19 +51,26 @@ namespace VTT {
 	{
 		Logger::getLogger()->debug("Shutting down AudioManager");
 
-		for (Source source : sources)
+		for (std::shared_ptr<Source> source : sources)
 		{
-			source.~Source();
+			source->~Source();
+			checkALError();
 		}
 
-		for (Buffer buffer : buffers)
+		sources.clear();
+
+		for (std::shared_ptr <Buffer> buffer : buffers)
 		{
-			buffer.~Buffer();
+			buffer->~Buffer();
+			checkALError();
 		}
+
+		buffers.clear();
 
 		alcMakeContextCurrent(context);
 
 		alcDestroyContext(context);
+		checkALCError(device);
 
 		alcCloseDevice(device);
 		INSTANCE = false;
@@ -129,7 +136,7 @@ namespace VTT {
 		}
 		return error_code;
 	}
-	Buffer AudioManager::loadVorbisFile(const char* filename)
+	std::shared_ptr<Buffer> AudioManager::loadVorbisFile(const char* filename)
 	{
 		Logger::getLogger()->info("Reading Audio file: {}", filename);
 		int channels = 0;
@@ -152,7 +159,8 @@ namespace VTT {
 			throw 1;
 		}
 
-		Buffer buffer(channels, sample_rate, 16, data, length);
+		//Buffer buffer(channels, sample_rate, 8, data, length);
+		std::shared_ptr<Buffer> buffer = std::make_shared<Buffer>(channels, sample_rate, 8, data, length);
 		buffers.push_back(buffer);
 
 		checkALError();
@@ -160,9 +168,9 @@ namespace VTT {
 		return buffer;
 	}
 
-	Source AudioManager::createSource(Buffer& buffer)
+	std::shared_ptr<Source> AudioManager::createSource(std::shared_ptr<Buffer> buffer)
 	{
-		Source source(1.0f, 1.0f, { 0.0, 0.0, 0.0 }, {0.0, 0.0, 0.0}, false, buffer);
+		std::shared_ptr<Source> source = std::make_shared<Source>(1.0f, 1.0f, glm::vec3{ 0.0, 0.0, 0.0 }, glm::vec3{0.0, 0.0, 0.0}, false, buffer->handle);
 		checkALError();
 
 		sources.push_back(source);
