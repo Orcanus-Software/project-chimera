@@ -35,7 +35,8 @@ namespace VTT {
 
 	void Source::CleanUp()
 	{
-		alDeleteSources(1, &handle);
+		if(alIsSource(handle))
+			alDeleteSources(1, &handle);
 	}
 
 	Source::~Source()

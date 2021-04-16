@@ -17,7 +17,8 @@ namespace VTT {
 
 	void Buffer::CleanUp()
 	{
-		alDeleteBuffers(1, &handle);
+		if(alIsBuffer(handle))
+			alDeleteBuffers(1, &handle);
 	}
 
 	Buffer::~Buffer()
