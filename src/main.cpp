@@ -1,4 +1,4 @@
-#include <vttpch.h>
+#include "vttpch.h"
 
 #include "render_target/Window.h"
 #include "debug/Log.h"
@@ -65,6 +65,7 @@ static void glfwFramebufferResizeCallback(GLFWwindow* window, int width, int hei
 
 bgfx::ShaderHandle loadShader(const char * filename) 
 {
+	MICROPROFILE_SCOPEI("shader", "loadshader", MP_YELLOW);
 	const char* shaderPath = "";
 
 	switch (bgfx::getRendererType()) {
@@ -102,6 +103,10 @@ bgfx::ShaderHandle loadShader(const char * filename)
 }
 
 int main(int argc, char** argv) {
+	MicroProfileOnThreadCreate("Main");
+	MicroProfileSetEnableAllGroups(true);
+	MicroProfileSetForceMetaCounters(true);
+
 	Logger::Init();
 
 	Logger::getLogger()->info("Initializing GLFW.");
@@ -158,6 +163,9 @@ int main(int argc, char** argv) {
 	Source source = audioManager.createSource(sound1);
 	source.play();
 
+	window.setVisible(true);
+	window.setMinimized(true);
+
 	// while the window should stay open.
 	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
@@ -199,12 +207,21 @@ int main(int argc, char** argv) {
 		// Advance to next frame. Process submitted rendering primitives.
 		bgfx::frame();
 		counter++;
+		MicroProfileFlip(nullptr);
 	}
 
 	Logger::getLogger()->debug("Shutting Down!");
 	// Try to shutdown and terminate
+	bgfx::destroy(vsh);
+	bgfx::destroy(fsh);
+	bgfx::destroy(program);
+	bgfx::destroy(vbh);
+	bgfx::destroy(ibh);
 	bgfx::shutdown();
+	window.CleanUp();
 	glfwTerminate();
+
+	MicroProfileShutdown();
 
 	return 0;
 }

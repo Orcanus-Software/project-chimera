@@ -11,7 +11,9 @@ VTT::Window::Window(const char * name, int width, int height)
 	}
 
 	// NOAPI, so that BGFX can render agnostically
+	glfwDefaultWindowHints();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	windowHandle = glfwCreateWindow(width, height, name, nullptr, nullptr);
 
 	// Test if the window exists
@@ -19,6 +21,16 @@ VTT::Window::Window(const char * name, int width, int height)
 		Logger::getLogger()->error("Failed to create window, aborting.");
 		throw 1;
 	}
+}
+
+VTT::Window::Window(GLFWwindow* window) 
+{
+	this->windowHandle = window;
+}
+
+void VTT::Window::CleanUp()
+{
+	glfwDestroyWindow(windowHandle);
 }
 
 VTT::Window::~Window() 
@@ -44,11 +56,11 @@ void VTT::Window::fillBGFXInit(bgfx::Init& init)
 	init.resolution.reset = BGFX_RESET_VSYNC;
 }
 
-bx::Vec3 VTT::Window::getSize()
+glm::vec2 VTT::Window::getSize()
 {
 	int width;
 	int height;
 	glfwGetWindowSize(windowHandle, &width, &height);
 	
-	return bx::Vec3(width, height, 0.0);
+	return glm::vec2{width, height};
 }
