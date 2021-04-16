@@ -15,4 +15,6 @@ Makefile
 bin/
 bin-int/
 
+logs/
+
 

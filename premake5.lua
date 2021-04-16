@@ -73,8 +73,7 @@ project "VTT"
 	files {
 		"src/**.h",
 		"src/**.cpp",
-		TINY_FD_DIR .. "tinyfiledialogs.c",
-		STB_DIR .. "stb_vorbis.c"
+		TINY_FD_DIR .. "tinyfiledialogs.c"
 	}
 	
 	includedirs {

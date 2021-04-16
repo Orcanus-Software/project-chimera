@@ -154,6 +154,9 @@ int main(int argc, char** argv) {
 	bgfx::ProgramHandle program = bgfx::createProgram(vsh, fsh, true);
 
 	AudioManager audioManager;
+	Buffer sound1 = audioManager.loadVorbisFile("resources/audio/test1.ogg");
+	Source source = audioManager.createSource(sound1);
+	source.play();
 
 	// while the window should stay open.
 	unsigned long counter = 0;

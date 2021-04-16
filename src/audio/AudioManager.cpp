@@ -2,6 +2,8 @@
 
 #include "AudioManager.h"
 
+#include <stb_vorbis.c>
+
 namespace VTT {
 
 	bool AudioManager::INSTANCE = false;
@@ -48,6 +50,16 @@ namespace VTT {
 	AudioManager::~AudioManager()
 	{
 		Logger::getLogger()->debug("Shutting down AudioManager");
+
+		for (Source source : sources)
+		{
+			source.~Source();
+		}
+
+		for (Buffer buffer : buffers)
+		{
+			buffer.~Buffer();
+		}
 
 		alcMakeContextCurrent(context);
 
@@ -116,5 +128,36 @@ namespace VTT {
 			}
 		}
 		return error_code;
+	}
+	Buffer AudioManager::loadVorbisFile(const char* filename)
+	{
+		Logger::getLogger()->info("Reading Audio file: {}", filename);
+		int channels = 0;
+		int sample_rate = 0;
+		short* data;
+		int length = stb_vorbis_decode_filename(filename, &channels, &sample_rate, &data);
+
+		if (length == -1) {
+			Logger::getLogger()->error("STB Vorbis error trying to read audio file.");
+			throw 1;
+		}
+		else if (length == -2) {
+			Logger::getLogger()->error("Broken STB malloc implementation. Could not read file.");
+			throw 1;
+		}
+
+		Buffer buffer(channels, sample_rate, 16, data, length);
+		buffers.push_back(buffer);
+
+		return buffer;
+	}
+
+	Source AudioManager::createSource(Buffer& buffer)
+	{
+		Source source(1.0f, 1.0f, { 0.0, 0.0, 0.0 }, {0.0, 0.0, 0.0}, false, buffer);
+
+		sources.push_back(source);
+
+		return source;
 	}
 }
