@@ -137,6 +137,8 @@ namespace VTT {
 		short* data;
 		int length = stb_vorbis_decode_filename(filename, &channels, &sample_rate, &data);
 
+		Logger::getLogger()->debug("Audio file length: {}", length);
+
 		if (length == -1) {
 			Logger::getLogger()->error("STB Vorbis error trying to read audio file.");
 			throw 1;
@@ -145,9 +147,15 @@ namespace VTT {
 			Logger::getLogger()->error("Broken STB malloc implementation. Could not read file.");
 			throw 1;
 		}
+		else if (data == nullptr) {
+			Logger::getLogger()->error("Audio data buffer points to null. What gives?");
+			throw 1;
+		}
 
 		Buffer buffer(channels, sample_rate, 16, data, length);
 		buffers.push_back(buffer);
+
+		checkALError();
 
 		return buffer;
 	}
@@ -155,6 +163,7 @@ namespace VTT {
 	Source AudioManager::createSource(Buffer& buffer)
 	{
 		Source source(1.0f, 1.0f, { 0.0, 0.0, 0.0 }, {0.0, 0.0, 0.0}, false, buffer);
+		checkALError();
 
 		sources.push_back(source);
 

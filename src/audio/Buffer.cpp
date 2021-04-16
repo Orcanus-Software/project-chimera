@@ -6,6 +6,9 @@ namespace VTT {
 	Buffer::Buffer(std::uint8_t channels, std::int32_t sampleRate, std::uint8_t bitsPerSample, short* data, int data_size)
 	{
 		alGenBuffers(1, &handle);
+		
+		Logger::getLogger()->debug("Created buffer");
+		AudioManager::checkALError();
 
 		if (setData(channels, sampleRate, bitsPerSample, data, data_size)) {
 			throw 1;
@@ -37,6 +40,9 @@ namespace VTT {
 		}
 
 		alBufferData(handle, format, data, data_size, sampleRate);
+
+		Logger::getLogger()->debug("Filled Buffer Data");
+		AudioManager::checkALError();
 
 		return error_code;
 	}

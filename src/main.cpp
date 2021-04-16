@@ -161,6 +161,8 @@ int main(int argc, char** argv) {
 	// while the window should stay open.
 	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
+		if (source.isPlaying())
+			Logger::getLogger()->info("Source is still playing.");
 		glfwPollEvents();
 		// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.
 		bgfx::touch(kClearView);
