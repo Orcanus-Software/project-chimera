@@ -214,6 +214,11 @@ int main(int argc, char** argv) {
 
 	Logger::getLogger()->debug("Shutting Down!");
 	// Try to shutdown and terminate
+	bgfx::destroy(vsh);
+	bgfx::destroy(fsh);
+	bgfx::destroy(program);
+	bgfx::destroy(vbh);
+	bgfx::destroy(ibh);
 	bgfx::shutdown();
 	window.CleanUp();
 	glfwTerminate();
