@@ -163,6 +163,9 @@ int main(int argc, char** argv) {
 	Source source = audioManager.createSource(sound1);
 	source.play();
 
+	window.setVisible(true);
+	window.setMinimized(true);
+
 	// while the window should stay open.
 	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
@@ -212,6 +215,7 @@ int main(int argc, char** argv) {
 	Logger::getLogger()->debug("Shutting Down!");
 	// Try to shutdown and terminate
 	bgfx::shutdown();
+	window.CleanUp();
 	glfwTerminate();
 
 	MicroProfileShutdown();
