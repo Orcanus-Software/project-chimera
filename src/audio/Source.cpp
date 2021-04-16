@@ -42,4 +42,14 @@ namespace VTT {
 	Source::~Source()
 	{
 	}
+
+	void Source::queue(Buffer& buffer) 
+	{ 
+		alSourceQueueBuffers(handle, 1, &buffer.handle); 
+	};
+	
+	void Source::unqueue(Buffer& buffer) 
+	{ 
+		alSourceUnqueueBuffers(handle, 1, &buffer.handle); 
+	};
 }

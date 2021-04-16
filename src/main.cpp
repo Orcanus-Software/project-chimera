@@ -160,11 +160,12 @@ int main(int argc, char** argv) {
 
 	AudioManager audioManager;
 	Buffer sound1 = audioManager.loadVorbisFile("resources/audio/test1.ogg");
+	Buffer sound2 = audioManager.loadVorbisFile("resources/audio/bounce.ogg");
+	Buffer sound3 = audioManager.loadVorbisFile("resources/audio/music1.ogg");
 	Source source = audioManager.createSource(sound1);
 	source.play();
 
 	window.setVisible(true);
-	window.setMinimized(true);
 
 	// while the window should stay open.
 	unsigned long counter = 0;
@@ -221,6 +222,7 @@ int main(int argc, char** argv) {
 	window.CleanUp();
 	glfwTerminate();
 
+	// Stop profiling last
 	MicroProfileShutdown();
 
 	return 0;

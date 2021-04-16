@@ -1,7 +1,7 @@
 #pragma once
 #include <vttpch.h>
 
-#include "Audio.h"
+#include "Buffer.h"
 
 namespace VTT {
 	class Buffer;
@@ -17,8 +17,8 @@ namespace VTT {
 		void pause() { alSourcePause(handle); };
 		void stop() { alSourceStop(handle); };
 		void rewind() { alSourceRewind(handle); };
-		void queue(Buffer buffer) { alSourceQueueBuffers(handle, 1, &buffer.handle); };
-		void unqueue(Buffer buffer) { alSourceUnqueueBuffers(handle, 1, &buffer.handle); };
+		void queue(Buffer& buffer);
+		void unqueue(Buffer& buffer);
 
 		bool isPlaying() { return queryInt(AL_SOURCE_STATE) == AL_PLAYING; };
 
