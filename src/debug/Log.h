@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <spdlog/spdlog.h>
-#include <memory>
+#include <vttpch.h>
 
 namespace VTT {
 	class Logger {

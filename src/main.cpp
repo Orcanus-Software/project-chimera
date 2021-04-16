@@ -1,13 +1,8 @@
-#include <iostream>
-#include <memory>
-#include <bx/bx.h>
-#include <bx/math.h>
-#include <bgfx/bgfx.h>
-#include <bgfx/platform.h>
+#include <vttpch.h>
+
 #include "render_target/Window.h"
 #include "debug/Log.h"
-#include <par_shapes.h>
-#include "tinyfiledialogs.h"
+#include "audio/Audio.h"
 
 using namespace VTT;
 
@@ -158,15 +153,15 @@ int main(int argc, char** argv) {
 	bgfx::ShaderHandle fsh = loadShader("fs_cubes.bin");
 	bgfx::ProgramHandle program = bgfx::createProgram(vsh, fsh, true);
 
+	AudioManager audioManager;
+
 	// while the window should stay open.
 	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
-		Logger::getLogger()->trace("Polling Events.");
 		glfwPollEvents();
 		// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.
 		bgfx::touch(kClearView);
 
-		Logger::getLogger()->trace("Setting up debug.");
 		// Use debug font to print information about this example.
 		bgfx::dbgTextClear();
 		//bgfx::dbgTextImage(bx::max<uint16_t>(uint16_t(win_width / 2 / 8), 20) - 20, bx::max<uint16_t>(uint16_t(win_height / 2 / 16), 6) - 6, 40, 12, s_logo, 160);
@@ -179,7 +174,6 @@ int main(int argc, char** argv) {
 		// Enable stats or debug text.
 		bgfx::setDebug(false ? BGFX_DEBUG_STATS : BGFX_DEBUG_TEXT);
 
-		Logger::getLogger()->trace("Setting up cube.");
 		// cube rendering
 		const bx::Vec3 at = { 0.0f, 0.0f, 0.0f };
 		const bx::Vec3 eye = { 0.0f, 0.0f, -5.0f };
@@ -197,7 +191,6 @@ int main(int argc, char** argv) {
 		bgfx::setVertexBuffer(0, vbh);
 		bgfx::setIndexBuffer(ibh);
 
-		Logger::getLogger()->trace("Rendering.");
 		bgfx::submit(0, program);
 
 		// Advance to next frame. Process submitted rendering primitives.

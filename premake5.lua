@@ -13,6 +13,11 @@ local STB_DIR = "lib/stb/"
 local YOGA_DIR = "lib/yoga/"
 local RPMALLOC_DIR = "lib/rpmalloc/"
 local TINY_FD_DIR = "lib/tinyfiledialogs/"
+local OPENAL_SOFT_DIR = "lib/openal-soft/"
+local ENTT_DIR = "lib/entt/"
+local GLM_DIR = "lib/glm/"
+local LIB_DIVIDE_DIR = "lib/libdivide/"
+local TINY_EXR_DIR = "lib/tinyexr/"
 
 workspace "VTT"
 	configurations { "Debug", "Release" }
@@ -62,10 +67,14 @@ project "VTT"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 	
+	pchheader "vttpch.h"
+	pchsource "src/vttpch.cpp"
+	
 	files {
 		"src/**.h",
 		"src/**.cpp",
-		TINY_FD_DIR .. "tinyfiledialogs.c"
+		TINY_FD_DIR .. "tinyfiledialogs.c",
+		STB_DIR .. "stb_vorbis.c"
 	}
 	
 	includedirs {
@@ -81,7 +90,16 @@ project "VTT"
 		IMGUI_DIR,
 		STB_DIR,
 		YOGA_DIR .. "yoga",
-		TINY_FD_DIR
+		TINY_FD_DIR,
+		OPENAL_SOFT_DIR .. "include",
+		ENTT_DIR .. "src",
+		GLM_DIR,
+		LIB_DIVIDE_DIR,
+		TINY_EXR_DIR
+	}
+	
+	libdirs {
+		OPENAL_SOFT_DIR .. "build/Release"
 	}
 	
 	links {
@@ -91,8 +109,13 @@ project "VTT"
 		"BX",
 		"spdlog",
 		"ImGUI",
-		"yoga"
+		"yoga",
+		"OpenAL32.lib"
 	}
+	
+	-- deactivate precompiled headers for C files
+	filter "files:**.c"
+		flags { "NoPCH" }
 	
 	filter "system:windows"
 		systemversion "latest"
@@ -104,6 +127,11 @@ project "VTT"
 			"comdlg32",
 			"ole32"
 		}
+		
+		-- copy openal dynamic library to run directory
+		postbuildcommands {
+			"{COPY} " .. OPENAL_SOFT_DIR .. "build/Release/OpenAL32.dll" .. " %{cfg.targetdir}"
+		}
 	
 	filter "system:linux"
 		links 
@@ -112,6 +140,11 @@ project "VTT"
 			"GL",
 			"pthread",
 			"X11"
+		}
+		
+		-- copy openal dynamic library to run directory
+		postbuildcommands {
+			"{COPY} " .. OPENAL_SOFT_DIR .. "build/Release/OpenAL32.so" .. " %{cfg.targetdir}"
 		}
 		
 	filter "system:macosx"

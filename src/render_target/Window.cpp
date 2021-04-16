@@ -1,4 +1,5 @@
 // Window.cpp
+#include <vttpch.h>
 #include "Window.h"
 
 VTT::Window::Window(const char * name, int width, int height) 
