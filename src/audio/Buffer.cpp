@@ -15,9 +15,13 @@ namespace VTT {
 		}
 	}
 
-	Buffer::~Buffer()
+	void Buffer::CleanUp()
 	{
 		alDeleteBuffers(1, &handle);
+	}
+
+	Buffer::~Buffer()
+	{
 	}
 	
 	int Buffer::setData(std::uint8_t channels, std::int32_t sampleRate, std::uint8_t bitsPerSample, short* data, int data_size)

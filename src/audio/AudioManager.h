@@ -13,14 +13,14 @@ namespace VTT {
 		ALCdevice* device;
 		ALCcontext* context;
 
-		std::vector<std::shared_ptr<Buffer>> buffers;
-		std::vector<std::shared_ptr<Source>> sources;
+		std::vector<Buffer> buffers;
+		std::vector<Source> sources;
 	public:
 		AudioManager();
 		~AudioManager();
 
-		std::shared_ptr<Buffer> loadVorbisFile(const char* filename);
-		std::shared_ptr<Source> createSource(std::shared_ptr<Buffer> buffer);
+		Buffer loadVorbisFile(const char* filename);
+		Source createSource(Buffer buffer);
 
 		static ALenum checkALError();
 		static ALCenum checkALCError(ALCdevice* device);
