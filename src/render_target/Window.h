@@ -16,7 +16,7 @@ namespace VTT {
 
 		void fillBGFXInit(bgfx::Init& init);
 
-		bx::Vec3 getSize();
+		glm::vec2 getSize();
 	private:
 		GLFWwindow* windowHandle;
 	};

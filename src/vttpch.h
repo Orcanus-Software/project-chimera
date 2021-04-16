@@ -31,3 +31,6 @@
 #include <YGLayout.h>
 
 #include <glm/glm.hpp>
+
+#define MICROPROFILE_IMPL
+#include <microprofile.h>

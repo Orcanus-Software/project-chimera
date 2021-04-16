@@ -18,6 +18,7 @@ local ENTT_DIR = "lib/entt/"
 local GLM_DIR = "lib/glm/"
 local LIB_DIVIDE_DIR = "lib/libdivide/"
 local TINY_EXR_DIR = "lib/tinyexr/"
+local MICROPROFILE_DIR = "lib/microprofile/"
 
 workspace "VTT"
 	configurations { "Debug", "Release" }
@@ -73,7 +74,8 @@ project "VTT"
 	files {
 		"src/**.h",
 		"src/**.cpp",
-		TINY_FD_DIR .. "tinyfiledialogs.c"
+		TINY_FD_DIR .. "tinyfiledialogs.c",
+		MICROPROFILE_DIR .. "microprofile.cpp"
 	}
 	
 	includedirs {
@@ -94,11 +96,13 @@ project "VTT"
 		ENTT_DIR .. "src",
 		GLM_DIR,
 		LIB_DIVIDE_DIR,
-		TINY_EXR_DIR
+		TINY_EXR_DIR,
+		MICROPROFILE_DIR
 	}
 	
 	libdirs {
-		OPENAL_SOFT_DIR .. "build/Release"
+		OPENAL_SOFT_DIR .. "build/Release",
+		OPENAL_SOFT_DIR .. "build"
 	}
 	
 	links {
@@ -108,13 +112,22 @@ project "VTT"
 		"BX",
 		"spdlog",
 		"ImGUI",
-		"yoga",
-		"OpenAL32.lib"
+		"yoga"
 	}
 	
+	defines {
+		"MICROPROFILE_UI=0",
+		"MICROPROFILE_WEBSERVER=1",
+		"MICROPROFILE_GPU_TIMERS=0"
+	}
+
 	-- deactivate precompiled headers for C files
 	filter "files:**.c"
 		flags { "NoPCH" }
+
+	-- change build options on linux
+	filter { "files:" .. MICROPROFILE_DIR .. "microprofile.cpp","system:linux", "action:gmake*"}
+		buildoptions { "-fpermissive" }
 	
 	filter "system:windows"
 		systemversion "latest"
@@ -124,7 +137,8 @@ project "VTT"
 		links 
 		{
 			"comdlg32",
-			"ole32"
+			"ole32",
+			"OpenAL32.lib"
 		}
 		
 		-- copy openal dynamic library to run directory
@@ -138,12 +152,13 @@ project "VTT"
 			"dl",
 			"GL",
 			"pthread",
-			"X11"
+			"X11",
+			"openal"
 		}
 		
 		-- copy openal dynamic library to run directory
 		postbuildcommands {
-			"{COPY} " .. OPENAL_SOFT_DIR .. "build/Release/OpenAL32.so" .. " %{cfg.targetdir}"
+			"{COPY} " .. OPENAL_SOFT_DIR .. "build/libopenal.so" .. " %{cfg.targetdir}"
 		}
 		
 	filter "system:macosx"
@@ -151,8 +166,8 @@ project "VTT"
 		{
 			"QuartzCore.framework",
 			"Metal.framework",
-			"Cocoa.framework", 
-			"IOKit.framework", 
+			"Cocoa.framework",
+			"IOKit.framework",
 			"CoreVideo.framework"
 		}
 	setBxCompat()

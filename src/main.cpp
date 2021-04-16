@@ -1,4 +1,4 @@
-#include <vttpch.h>
+#include "vttpch.h"
 
 #include "render_target/Window.h"
 #include "debug/Log.h"
@@ -65,6 +65,7 @@ static void glfwFramebufferResizeCallback(GLFWwindow* window, int width, int hei
 
 bgfx::ShaderHandle loadShader(const char * filename) 
 {
+	MICROPROFILE_SCOPEI("shader", "loadshader", MP_YELLOW);
 	const char* shaderPath = "";
 
 	switch (bgfx::getRendererType()) {
@@ -102,6 +103,10 @@ bgfx::ShaderHandle loadShader(const char * filename)
 }
 
 int main(int argc, char** argv) {
+	MicroProfileOnThreadCreate("Main");
+	MicroProfileSetEnableAllGroups(true);
+	MicroProfileSetForceMetaCounters(true);
+
 	Logger::Init();
 
 	Logger::getLogger()->info("Initializing GLFW.");
@@ -201,12 +206,15 @@ int main(int argc, char** argv) {
 		// Advance to next frame. Process submitted rendering primitives.
 		bgfx::frame();
 		counter++;
+		MicroProfileFlip(nullptr);
 	}
 
 	Logger::getLogger()->debug("Shutting Down!");
 	// Try to shutdown and terminate
 	bgfx::shutdown();
 	glfwTerminate();
+
+	MicroProfileShutdown();
 
 	return 0;
 }

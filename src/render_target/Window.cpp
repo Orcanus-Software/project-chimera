@@ -44,11 +44,11 @@ void VTT::Window::fillBGFXInit(bgfx::Init& init)
 	init.resolution.reset = BGFX_RESET_VSYNC;
 }
 
-bx::Vec3 VTT::Window::getSize()
+glm::vec2 VTT::Window::getSize()
 {
 	int width;
 	int height;
 	glfwGetWindowSize(windowHandle, &width, &height);
 	
-	return bx::Vec3(width, height, 0.0);
+	return glm::vec2{width, height};
 }

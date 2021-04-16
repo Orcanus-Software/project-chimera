@@ -49,3 +49,6 @@
 [submodule "lib/PhysX"]
 	path = lib/PhysX
 	url = https://github.com/NVIDIAGameWorks/PhysX.git
+[submodule "lib/microprofile"]
+	path = lib/microprofile
+	url = https://github.com/jonasmr/microprofile.git
