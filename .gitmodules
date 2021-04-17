@@ -52,3 +52,6 @@
 [submodule "lib/microprofile"]
 	path = lib/microprofile
 	url = https://github.com/jonasmr/microprofile.git
+[submodule "lib/debug-draw"]
+	path = lib/debug-draw
+	url = https://github.com/glampert/debug-draw.git
