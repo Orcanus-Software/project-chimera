@@ -8,8 +8,10 @@ namespace VTT {
 
 	class Source {
 		ALuint handle;
+		Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop);
+
+		friend class AudioManager;
 	public:
-		Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop, Buffer buffer);
 		void CleanUp();
 		~Source();
 
@@ -19,6 +21,7 @@ namespace VTT {
 		void rewind() { alSourceRewind(handle); };
 		void queue(Buffer& buffer);
 		void unqueue(Buffer& buffer);
+		void setBuffer(Buffer& buffer);
 
 		bool isPlaying() { return queryInt(AL_SOURCE_STATE) == AL_PLAYING; };
 

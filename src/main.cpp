@@ -162,7 +162,12 @@ int main(int argc, char** argv) {
 	Buffer sound1 = audioManager.loadVorbisFile("resources/audio/test1.ogg");
 	Buffer sound2 = audioManager.loadVorbisFile("resources/audio/bounce.ogg");
 	Buffer sound3 = audioManager.loadVorbisFile("resources/audio/music1.ogg");
-	Source source = audioManager.createSource(sound1);
+	Source source = audioManager.createSource();
+	// source.queue(sound1);
+	source.setBuffer(sound2);
+	//sound_ptr = &source;
+	//AudioManager::checkALError();
+	// source.queue(sound3);
 	source.play();
 
 	window.setVisible(true);
@@ -170,6 +175,7 @@ int main(int argc, char** argv) {
 	// while the window should stay open.
 	unsigned long counter = 0;
 	while (!glfwWindowShouldClose(window.getHandle())) {
+
 		glfwPollEvents();
 		// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.
 		bgfx::touch(kClearView);

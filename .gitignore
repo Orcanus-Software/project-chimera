@@ -2,6 +2,7 @@
 **.vcxproj*
 **.sln
 .vs/
+.vscode/
 
 # Makefiles
 Makefile

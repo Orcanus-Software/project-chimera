@@ -144,7 +144,7 @@ namespace VTT {
 		short* data;
 		int length = stb_vorbis_decode_filename(filename, &channels, &sample_rate, &data);
 
-		Logger::getLogger()->debug("Audio file length: {}", length*sizeof(short));
+		Logger::getLogger()->debug("Audio file length: {}", length*sizeof(short)*channels);
 
 		if (length == -1) {
 			Logger::getLogger()->error("STB Vorbis error trying to read audio file.");
@@ -159,7 +159,7 @@ namespace VTT {
 			throw 1;
 		}
 
-		Buffer buffer(channels, sample_rate, 16, (char*) data, length*sizeof(short));
+		Buffer buffer(channels, sample_rate, 16, (char*) data, length*sizeof(short)*channels);
 		//std::shared_ptr<Buffer> buffer = std::make_shared<Buffer>(channels, sample_rate, 8, data, length);
 		buffers.push_back(buffer);
 
@@ -168,9 +168,9 @@ namespace VTT {
 		return buffer;
 	}
 
-	Source AudioManager::createSource(Buffer buffer)
+	Source AudioManager::createSource()
 	{
-		Source source(1.0f, 1.0f, glm::vec3{ 0.0, 0.0, 0.0 }, glm::vec3{0.0, 0.0, 0.0}, false, buffer);
+		Source source(1.0f, 1.0f, glm::vec3{ 0.0, 0.0, 0.0 }, glm::vec3{0.0, 0.0, 0.0}, false);
 		checkALError();
 
 		sources.push_back(source);

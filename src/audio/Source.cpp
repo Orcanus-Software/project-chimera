@@ -3,7 +3,7 @@
 #include "Source.h"
 
 namespace VTT {
-	Source::Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop, Buffer buffer)
+	Source::Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop)
 	{
 		alGenSources(1, &handle);
 		Logger::getLogger()->debug("Source created.");
@@ -28,9 +28,9 @@ namespace VTT {
 		Logger::getLogger()->debug("Looping set.");
 		AudioManager::checkALError();
 
-		setInt(AL_BUFFER, buffer.handle);
-		Logger::getLogger()->debug("Buffer set.");
-		AudioManager::checkALError();
+		// setInt(AL_BUFFER, buffer.handle);
+		// Logger::getLogger()->debug("Buffer set.");
+		// AudioManager::checkALError();
 	}
 
 	void Source::CleanUp()
@@ -52,4 +52,9 @@ namespace VTT {
 	{ 
 		alSourceUnqueueBuffers(handle, 1, &buffer.handle); 
 	};
+
+	void Source::setBuffer(Buffer& buffer)
+	{
+		setInt(AL_BUFFER, buffer.handle);
+	}
 }

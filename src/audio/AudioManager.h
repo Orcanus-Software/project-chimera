@@ -20,7 +20,7 @@ namespace VTT {
 		~AudioManager();
 
 		Buffer loadVorbisFile(const char* filename);
-		Source createSource(Buffer buffer);
+		Source createSource();
 
 		void setListenerPosition(glm::vec3 position);
 		void setListenerVelocity(glm::vec3 velocitys);
