@@ -168,7 +168,7 @@ int main(int argc, char** argv) {
 	//sound_ptr = &source;
 	//AudioManager::checkALError();
 	// source.queue(sound3);
-	source.play();
+	//source.play();
 
 	window.setVisible(true);
 
@@ -208,6 +208,11 @@ int main(int argc, char** argv) {
 
 		bgfx::setVertexBuffer(0, vbh);
 		bgfx::setIndexBuffer(ibh);
+
+		bgfx::submit(0, program);
+
+		bx::mtxTranslate(mtx, 0.5, 0.0, 0.0);
+		bgfx::setTransform(mtx);
 
 		bgfx::submit(0, program);
 

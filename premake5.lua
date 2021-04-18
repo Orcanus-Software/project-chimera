@@ -124,10 +124,22 @@ project "VTT"
 	-- deactivate precompiled headers for C files
 	filter "files:**.c"
 		flags { "NoPCH" }
+	
+	filter { "files:" .. MICROPROFILE_DIR .. "microprofile.cpp" }
+		flags { "NoPCH" }
 
 	-- change build options on linux
 	filter { "files:" .. MICROPROFILE_DIR .. "microprofile.cpp","system:linux", "action:gmake*"}
 		buildoptions { "-fpermissive" }
+		
+	-- change build options on windows
+	filter { "files:" .. MICROPROFILE_DIR .. "microprofile.cpp","system:windows", "action:vs*"}	
+		buildoptions { "/permissive" }
+		defines {
+			'PRIx64="llx"',
+			'PRIu64="llu"',
+			'PRId64="lld"'
+		}
 	
 	filter "system:windows"
 		systemversion "latest"
@@ -138,7 +150,8 @@ project "VTT"
 		{
 			"comdlg32",
 			"ole32",
-			"OpenAL32.lib"
+			"OpenAL32.lib",
+			"Ws2_32.lib"
 		}
 		
 		-- copy openal dynamic library to run directory

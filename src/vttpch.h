@@ -32,5 +32,7 @@
 
 #include <glm/glm.hpp>
 
+#include <stb_sprintf.h>
+
 #define MICROPROFILE_IMPL
 #include <microprofile.h>
