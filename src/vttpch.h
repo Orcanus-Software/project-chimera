@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include <spdlog/spdlog.h>
 
@@ -38,3 +39,5 @@
 #include <microprofile.h>
 
 #include <imgui.h>
+
+#include <entt.hpp>

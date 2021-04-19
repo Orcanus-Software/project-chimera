@@ -6,10 +6,11 @@
 #include "debug/Log.h"
 
 namespace Chimera {
+
 	class Window 
 	{
 	public:
-		Window(const char* name, int width, int height);
+		Window(const std::string& name = "Chimera Window", int width = 1024, int height = 728, int hints_length = 0, ...);
 		Window(GLFWwindow* windowHandle);
 		void cleanUp();
 		~Window();
@@ -38,13 +39,10 @@ namespace Chimera {
 
 		void setResizeCallback(GLFWwindowsizefun callback) { glfwSetWindowSizeCallback(windowHandle, callback); };
 
-		void linkFB();
-
-		static void LogErrors();
 		static void ProgramEnd() { glfwTerminate(); };
 	private:
 		GLFWwindow* windowHandle;
 		static void LogError(int error, const char* description);
-		static void SetViewRectToWindowSize(GLFWwindow* window, int width, int height);
+		static void OnResize(GLFWwindow* window, int width, int height);
 	};
 }

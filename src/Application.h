@@ -10,8 +10,6 @@ namespace Chimera {
 
 		void onRender();
 
-		void showDebugText();
-
 		void showImGUI();
 
 		~Application();

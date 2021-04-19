@@ -6,8 +6,6 @@
 #include "Application.h"
 #include "renderer/Renderer.h"
 
-using namespace Chimera;
-
 //const bgfx::ViewId kClearView = 0;
 
 struct PosColorVertex
@@ -85,7 +83,7 @@ bgfx::ShaderHandle loadShader(const char * filename)
 	memcpy(&filePath[shaderLen], filename, fileLen);
 	filePath[shaderLen + fileLen] = '\0';
 
-	Logger::getLogger()->info("Opening shader file: {}", filePath);
+	Chimera::Logger::getLogger()->info("Opening shader file: {}", filePath);
 
 	FILE* file = fopen(filePath, "rb");
 	fseek(file, 0, SEEK_END);
@@ -242,26 +240,23 @@ int main(int argc, char** argv) {
 	MicroProfileSetEnableAllGroups(true);
 	MicroProfileSetForceMetaCounters(true);
 
-	Logger::Init();
-	Logger::getLogger()->info("Starting Application");
+	Chimera::Logger::Init();
+	Chimera::Logger::getLogger()->info("Starting Application");
 
-	Logger::getLogger()->info("Initializing GLFW");
-	Window::LogErrors();
+	Chimera::Logger::getLogger()->info("Initializing GLFW");
+	Chimera::Window window("Project Chimera", 1024, 728, 2, GLFW_VISIBLE, GLFW_FALSE, GLFW_RESIZABLE, GLFW_TRUE);
 
-	Window window("Project Chimera", 1024, 728);
-	window.linkFB();
-
-	Logger::getLogger()->info("Initializing Renderer");
+	Chimera::Logger::getLogger()->info("Initializing Renderer");
 	// Initialize bgfx using the native window handle and window resolution.
 	RENDERER_API::Init init;
 	window.fillBGFXInit(init);
-	Renderer renderer(init);
+	Chimera::Renderer renderer(init);
 
-	// Initialize ImGUI
+	par_shapes_mesh* object = par_shapes_create_cube();
 
 	window.setVisible(true);
 
-	Application application;
+	Chimera::Application application;
 
 	while (!window.shouldClose())
 	{
@@ -270,18 +265,18 @@ int main(int argc, char** argv) {
 		// Use debug font to print information about this example.
 		RENDERER_API::dbgTextClear();
 
-		application.showDebugText();
+		application.onRender();
 
 		renderer.render();
 
 		MicroProfileFlip(nullptr);
 	}
 
-	Logger::getLogger()->info("Shutting down!");
+	Chimera::Logger::getLogger()->info("Shutting down!");
 
 	renderer.cleanUp();
 	window.cleanUp();
-	Window::ProgramEnd();
+	Chimera::Window::ProgramEnd();
 
 	MicroProfileShutdown();
 

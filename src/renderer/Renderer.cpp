@@ -2,7 +2,9 @@
 
 #include "Renderer.h"
 
-Chimera::Renderer::Renderer(RENDERER_API::Init init)
+namespace Chimera {
+
+Renderer::Renderer(RENDERER_API::Init init)
 {
 	// Call bgfx::renderFrame before bgfx::init to signal to bgfx not to create a render thread.
 	// Most graphics APIs must be used on the same thread that created the window.
@@ -20,21 +22,31 @@ Chimera::Renderer::Renderer(RENDERER_API::Init init)
 	bgfx::setViewRect(VIEW_ID, 0, 0, bgfx::BackbufferRatio::Equal);
 }
 
-void Chimera::Renderer::cleanUp()
+void Renderer::cleanUp()
 {
 	RENDERER_API::shutdown();
 }
 
-Chimera::Renderer::~Renderer()
+Renderer::~Renderer()
 {
 	
 }
 
-void Chimera::Renderer::render()
+void Renderer::beginFrame()
 {
 	RENDERER_API::touch(VIEW_ID);
+}
 
+void Renderer::render(Model& model)
+{
+	model.bind();
+}
+
+void Renderer::endFrame()
+{
 	RENDERER_API::setDebug(BGFX_DEBUG_TEXT);
 
 	RENDERER_API::frame();
+}
+
 }

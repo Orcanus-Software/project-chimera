@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../debug/Log.h"
+#include "Model.h"
 
 #ifndef VIEW_ID
 #define VIEW_ID 0
@@ -16,6 +17,8 @@ namespace Chimera {
 		void cleanUp();
 		~Renderer();
 
-		void render();
+		void beginFrame();
+		void render(Model& model);
+		void endFrame();
 	};
 }

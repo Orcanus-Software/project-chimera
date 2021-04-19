@@ -108,7 +108,6 @@ project "VirtualTableTop"
 	}
 	
 	links {
-		"assimp",
 		"GLFW",
 		"BGFX",
 		"BIMG",
@@ -452,7 +451,8 @@ project "ImGUI"
 		IMGUI_DIR .. "imstb_rectpack.h",
 		IMGUI_DIR .. "imstb_textedit.h",
 		IMGUI_DIR .. "imstb_truetype.h",
-		IMGUI_DIR .. "imgui_demo.cpp"
+		IMGUI_DIR .. "imgui_demo.cpp",
+		IMGUI_DIR .. "imgui_tables.cpp"
 	}
 	
 	filter "system:windows"
@@ -498,42 +498,47 @@ project "yoga"
 		}
 		
 -- Building ASSIMP
-project "assimp"
-	kind "StaticLib"
-	language "C++"
-	cppdialect "C++11"
-	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+-- project "assimp"
+-- 	kind "StaticLib"
+-- 	language "C++"
+-- 	cppdialect "C++11"
+-- 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+-- 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 	
-	files 
-	{
-		ASSIMP_DIR .. "code/**.cpp",
-		ASSIMP_DIR .. "code/**.h",
-		ASSIMP_DIR .. "contrib/**.cpp",
-		ASSIMP_DIR .. "contrib/**.h",
-		ASSIMP_DIR .. "contrib/**.hpp"
-	}
+-- 	files 
+-- 	{
+-- 		ASSIMP_DIR .. "code/**.cpp",
+-- 		ASSIMP_DIR .. "code/**.h",
+-- 		ASSIMP_DIR .. "contrib/**.cpp",
+-- 		ASSIMP_DIR .. "contrib/**.h",
+	-- 	ASSIMP_DIR .. "contrib/**.hpp"
+	-- }
 	
-	includedirs
-	{
-		ASSIMP_DIR .. "include",
-		ASSIMP_DIR .. "code",
-		ASSIMP_DIR,
-		ASSIMP_DIR .. "contrib",
-		ASSIMP_DIR .. "contrib/pugixml/src",
-		ASSIMP_DIR .. "contrib/pugixml/contrib",
-		ASSIMP_DIR .. "contrib/poly2tri/poly2tri",
-		ASSIMP_DIR .. "contrib/unzip",
-		ASSIMP_DIR .. "contrib/openddlparser/include",
-		ASSIMP_DIR .. "contrib/rapidjson/include"
-	}
+	-- includedirs
+	-- {
+	-- 	ASSIMP_DIR .. "include",
+	-- 	ASSIMP_DIR .. "code",
+	-- 	ASSIMP_DIR,
+	-- 	ASSIMP_DIR .. "contrib",
+	-- 	ASSIMP_DIR .. "contrib/pugixml/src",
+	-- 	ASSIMP_DIR .. "contrib/pugixml/contrib",
+	-- 	ASSIMP_DIR .. "contrib/poly2tri/poly2tri",
+	-- 	ASSIMP_DIR .. "contrib/unzip",
+	-- 	ASSIMP_DIR .. "contrib/openddlparser/include",
+	-- 	ASSIMP_DIR .. "contrib/rapidjson/include"
+	-- }
 	
-	defines 
-	{
-		"ASSIMP_DOUBLE_PRECISION=1"
-	}
+	-- defines 
+	-- {
+	-- 	"ASSIMP_DOUBLE_PRECISION=1"
+	-- }
 	
-	filter "system:windows"
-		prebuildcommands {
-			"%{wks.location}configure_assimp_files.bat"
-		}
+	-- filter "system:linux" 
+	-- 	prebuildcommands {
+	-- 		"%{wks.location}/configure_assimp_files.sh"
+	-- 	}
+
+	-- filter "system:windows"
+	-- 	prebuildcommands {
+	-- 		"%{wks.location}configure_assimp_files.bat"
+	-- 	}
