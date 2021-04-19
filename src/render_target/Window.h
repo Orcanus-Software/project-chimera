@@ -5,13 +5,13 @@
 
 #include "debug/Log.h"
 
-namespace VTT {
+namespace Chimera {
 	class Window 
 	{
 	public:
 		Window(const char* name, int width, int height);
 		Window(GLFWwindow* windowHandle);
-		void CleanUp();
+		void cleanUp();
 		~Window();
 
 		GLFWwindow* getHandle() { return windowHandle; }
@@ -33,7 +33,18 @@ namespace VTT {
 
 		void setMinimized(bool minimize) {if (minimize) { glfwIconifyWindow(windowHandle); } else { glfwRestoreWindow(windowHandle); }}
 		bool isMinimized() { return getAttribute(GLFW_ICONIFIED); }
+
+		bool shouldClose() { return glfwWindowShouldClose(windowHandle); }
+
+		void setResizeCallback(GLFWwindowsizefun callback) { glfwSetWindowSizeCallback(windowHandle, callback); };
+
+		void linkFB();
+
+		static void LogErrors();
+		static void ProgramEnd() { glfwTerminate(); };
 	private:
 		GLFWwindow* windowHandle;
+		static void LogError(int error, const char* description);
+		static void SetViewRectToWindowSize(GLFWwindow* window, int width, int height);
 	};
 }

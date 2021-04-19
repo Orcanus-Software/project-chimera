@@ -3,7 +3,7 @@
 #include <vttpch.h>
 #include "Audio.h"
 
-namespace VTT {
+namespace Chimera {
 	class Buffer {
 	private:
 		ALuint handle;

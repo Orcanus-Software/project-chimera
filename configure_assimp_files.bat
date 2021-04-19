@@ -1,0 +1,2 @@
+powershell -Command "(gc lib/assimp/include/assimp/config.h.in) -replace '#cmakedefine', '//#cmakedefine' | Out-File -encoding ASCII lib/assimp/include/assimp/config.h"
+copy /B /Y lib\assimp\revision.h.in lib\assimp\revision.h

@@ -2,7 +2,7 @@
 
 #include "Source.h"
 
-namespace VTT {
+namespace Chimera {
 	Source::Source(float pitch, float gain, glm::vec3 pos, glm::vec3 vel, bool shouldLoop)
 	{
 		alGenSources(1, &handle);

@@ -3,7 +3,7 @@
 
 #include "Buffer.h"
 
-namespace VTT {
+namespace Chimera {
 	class Buffer;
 
 	class Source {

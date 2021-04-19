@@ -2,7 +2,7 @@
 
 #include <vttpch.h>
 
-namespace VTT {
+namespace Chimera {
 	class Logger {
 	public:
 		static void Init();

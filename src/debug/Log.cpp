@@ -4,7 +4,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
 
-namespace VTT
+namespace Chimera
 {
 	std::shared_ptr<spdlog::logger> Logger::logger;
 

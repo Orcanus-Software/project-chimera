@@ -2,7 +2,7 @@
 
 #include "Buffer.h"
 
-namespace VTT {
+namespace Chimera {
 	Buffer::Buffer(std::uint8_t channels, std::int32_t sampleRate, std::uint8_t bitsPerSample, char* data, ALsizei data_size)
 	{
 		alGenBuffers(1, &handle);

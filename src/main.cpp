@@ -3,10 +3,12 @@
 #include "render_target/Window.h"
 #include "debug/Log.h"
 #include "audio/Audio.h"
+#include "Application.h"
+#include "renderer/Renderer.h"
 
-using namespace VTT;
+using namespace Chimera;
 
-const bgfx::ViewId kClearView = 0;
+//const bgfx::ViewId kClearView = 0;
 
 struct PosColorVertex
 {
@@ -30,24 +32,19 @@ static PosColorVertex cubeVertices[] =
 
 static const uint16_t cubeTriList[] =
 {
-    0, 1, 2,
-    1, 3, 2,
-    4, 6, 5,
-    5, 6, 7,
-    0, 2, 4,
-    4, 2, 6,
-    1, 5, 3,
-    5, 7, 3,
-    0, 4, 1,
-    4, 5, 1,
-    2, 3, 6,
-    6, 3, 7,
+	0, 1, 2,
+	1, 3, 2,
+	4, 6, 5,
+	5, 6, 7,
+	0, 2, 4,
+	4, 2, 6,
+	1, 5, 3,
+	5, 7, 3,
+	0, 4, 1,
+	4, 5, 1,
+	2, 3, 6,
+	6, 3, 7,
 };
-
-static void glfwErrorCallback(int error, const char* description)
-{
-	fprintf(stderr, "GLFW error %d: %s\n", error, description);
-}
 
 static void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -57,12 +54,13 @@ static void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int actio
 		glfwSetWindowShouldClose(window, true);
 }
 
+/*
 static void glfwFramebufferResizeCallback(GLFWwindow* window, int width, int height)
 {
 	bgfx::reset((uint32_t)width, (uint32_t)height, BGFX_RESET_VSYNC);
 	bgfx::setViewRect(kClearView, 0, 0, bgfx::BackbufferRatio::Equal);
 }
-
+*/
 bgfx::ShaderHandle loadShader(const char * filename) 
 {
 	MICROPROFILE_SCOPEI("shader", "loadshader", MP_YELLOW);
@@ -103,7 +101,7 @@ bgfx::ShaderHandle loadShader(const char * filename)
 }
 
 int main(int argc, char** argv) {
-	MicroProfileOnThreadCreate("Main");
+	/*MicroProfileOnThreadCreate("Main");
 	MicroProfileSetEnableAllGroups(true);
 	MicroProfileSetForceMetaCounters(true);
 
@@ -190,7 +188,7 @@ int main(int argc, char** argv) {
 		const bgfx::Stats* stats = bgfx::getStats();
 		bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters.", stats->width, stats->height, stats->textWidth, stats->textHeight);
 		// Enable stats or debug text.
-		bgfx::setDebug(false ? BGFX_DEBUG_STATS : BGFX_DEBUG_TEXT);
+		bgfx::setDebug(true ? BGFX_DEBUG_STATS : BGFX_DEBUG_TEXT);
 
 		// cube rendering
 		const bx::Vec3 at = { 0.0f, 0.0f, 0.0f };
@@ -217,7 +215,7 @@ int main(int argc, char** argv) {
 		bgfx::submit(0, program);
 
 		// Advance to next frame. Process submitted rendering primitives.
-		bgfx::frame();
+		bgfx::frame(true);
 		counter++;
 		MicroProfileFlip(nullptr);
 	}
@@ -237,4 +235,56 @@ int main(int argc, char** argv) {
 	MicroProfileShutdown();
 
 	return 0;
+	*/
+
+	MicroProfileOnThreadCreate("Main");
+
+	MicroProfileSetEnableAllGroups(true);
+	MicroProfileSetForceMetaCounters(true);
+
+	Logger::Init();
+	Logger::getLogger()->info("Starting Application");
+
+	Logger::getLogger()->info("Initializing GLFW");
+	Window::LogErrors();
+
+	Window window("Project Chimera", 1024, 728);
+	window.linkFB();
+
+	Logger::getLogger()->info("Initializing Renderer");
+	// Initialize bgfx using the native window handle and window resolution.
+	RENDERER_API::Init init;
+	window.fillBGFXInit(init);
+	Renderer renderer(init);
+
+	// Initialize ImGUI
+
+	window.setVisible(true);
+
+	Application application;
+
+	while (!window.shouldClose())
+	{
+		glfwPollEvents();
+
+		// Use debug font to print information about this example.
+		RENDERER_API::dbgTextClear();
+
+		application.showDebugText();
+
+		renderer.render();
+
+		MicroProfileFlip(nullptr);
+	}
+
+	Logger::getLogger()->info("Shutting down!");
+
+	renderer.cleanUp();
+	window.cleanUp();
+	Window::ProgramEnd();
+
+	MicroProfileShutdown();
+
+	return 0;
+
 }

@@ -4,7 +4,7 @@
 
 #include <stb_vorbis.c>
 
-namespace VTT {
+namespace Chimera {
 
 	bool AudioManager::INSTANCE = false;
 

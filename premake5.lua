@@ -2,6 +2,7 @@
 
 -- Directory Defines
 local ASSIMP_DIR = "lib/assimp/"
+local ASSIMP_DIR_WIN = "lib\\assimp\\"
 local GLFW_DIR = "lib/glfw/"
 local BGFX_DIR = "lib/bgfx/"
 local BIMG_DIR = "lib/bimg/"
@@ -20,10 +21,11 @@ local LIB_DIVIDE_DIR = "lib/libdivide/"
 local TINY_EXR_DIR = "lib/tinyexr/"
 local MICROPROFILE_DIR = "lib/microprofile/"
 
-workspace "VTT"
+workspace "Chimera"
 	configurations { "Debug", "Release" }
 	-- Most of these configurations aren't actually working yet, but they are here for the future.
-	platforms { "x64", "Xbox", "PlayStation", "macOS", "iOS", "Linux_x64" }
+	platforms { "x64", "Xbox", "PlayStation", "iOS" }
+	startproject "VirtualTableTop"
 	
 	filter "configurations:Debug"
 		defines { "DEBUG" }
@@ -62,7 +64,7 @@ function setBxCompat()
 end
 
 -- The actual project
-project "VTT"
+project "VirtualTableTop"
 	kind "ConsoleApp"
 	language "C++"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -106,6 +108,7 @@ project "VTT"
 	}
 	
 	links {
+		"assimp",
 		"GLFW",
 		"BGFX",
 		"BIMG",
@@ -285,6 +288,7 @@ project "GLFW"
 project "BGFX"
 	kind "StaticLib"
 	language "C++"
+	cppdialect "C++11"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 	
@@ -366,6 +370,7 @@ project "BIMG"
 project "BX"
 	kind "StaticLib"
 	language "C++"
+	cppdialect "C++11"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 	
@@ -490,4 +495,40 @@ project "yoga"
 		defines 
 		{
 			"DEBUG"
+		}
+		
+-- Building ASSIMP
+project "assimp"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++11"
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+	
+	files 
+	{
+		ASSIMP_DIR .. "code/**.cpp",
+		ASSIMP_DIR .. "code/**.h",
+		ASSIMP_DIR .. "contrib/**.cpp",
+		ASSIMP_DIR .. "contrib/**.h",
+		ASSIMP_DIR .. "contrib/**.hpp"
+	}
+	
+	includedirs
+	{
+		ASSIMP_DIR .. "include",
+		ASSIMP_DIR .. "code",
+		ASSIMP_DIR,
+		ASSIMP_DIR .. "contrib/pugixml/src",
+		ASSIMP_DIR .. "contrib/pugixml/contrib"
+	}
+	
+	defines 
+	{
+		"ASSIMP_DOUBLE_PRECISION=1"
+	}
+	
+	filter "system:windows"
+		prebuildcommands {
+			"%{wks.location}configure_assimp_files.bat"
 		}
