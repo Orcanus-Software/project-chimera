@@ -519,8 +519,13 @@ project "assimp"
 		ASSIMP_DIR .. "include",
 		ASSIMP_DIR .. "code",
 		ASSIMP_DIR,
+		ASSIMP_DIR .. "contrib",
 		ASSIMP_DIR .. "contrib/pugixml/src",
-		ASSIMP_DIR .. "contrib/pugixml/contrib"
+		ASSIMP_DIR .. "contrib/pugixml/contrib",
+		ASSIMP_DIR .. "contrib/poly2tri/poly2tri",
+		ASSIMP_DIR .. "contrib/unzip",
+		ASSIMP_DIR .. "contrib/openddlparser/include",
+		ASSIMP_DIR .. "contrib/rapidjson/include"
 	}
 	
 	defines 
